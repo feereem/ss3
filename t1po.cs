@@ -48,6 +48,7 @@ public class ProductsController : ControllerBase
     {
         var pd = await db.Products.FindAsync(id);
         if (pd == null) return NotFound(new { message = "No Product Found" });
+        db.Products.Remove(pd);
         await db.SaveChangesAsync();
         return Ok("Delete Success");
     }
