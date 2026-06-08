@@ -21,7 +21,7 @@ public class ProductsController : ControllerBase
     public async Task<ActionResult<Product>> GetProductByID(int id)
     {
         var pd = await db.Products.FindAsync(id);
-        if(pd != null) return NotFound(new {message = "No Product Found"});
+        if(pd == null) return NotFound(new {message = "No Product Found"});
         return pd;
     }
 
@@ -47,7 +47,7 @@ public class ProductsController : ControllerBase
     public async Task<ActionResult<Product>> DeleteProduct(int id)
     {
         var pd = await db.Products.FindAsync(id);
-        if (pd != null) return NotFound(new { message = "No Product Found" });
+        if (pd == null) return NotFound(new { message = "No Product Found" });
         await db.SaveChangesAsync();
         return Ok("Delete Success");
     }
